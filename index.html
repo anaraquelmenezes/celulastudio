@@ -519,6 +519,12 @@ var CELULA = {
   },
 
   projetos: [
+    { titulo: "Sistema de reservas para hospedagens", categoria: "Gestão e reservas", etiquetas: ["Reservas", "Calendário", "Financeiro"],
+      texto: "Cadastro de quartos, reservas, calendário de disponibilidade por cores, painel financeiro e pesquisa de satisfação por WhatsApp após o check-out.", mock: "cal", tom: "dk" },
+    { titulo: "Site para hospedagens", categoria: "Sites e web apps", etiquetas: ["Galeria de fotos", "Mapa", "Contato"],
+      texto: "Página com os quartos, galeria de fotos, distâncias até pontos próximos e mapa, para o hóspede conhecer o lugar e falar direto com a hospedagem.", mock: "kpi", tom: "lt" },
+    { titulo: "Leilão online para bazares", categoria: "Web apps e automação", etiquetas: ["Lances", "Encerramento", "WhatsApp"],
+      texto: "Site de leilão em que todas as peças encerram juntas, em um horário único, com lances online e contato dos participantes por WhatsApp.", mock: "chart", tom: "dk" },
     { titulo: "Sistema de reservas para pousadas", categoria: "Gestão e reservas", etiquetas: ["Reservas", "Ocupação", "Hóspedes"],
       texto: "Calendário de ocupação, cadastro de hóspedes, valores por período e painel de reservas em um só lugar.", mock: "cal", tom: "dk", exemplo: true },
     { titulo: "Matrícula escolar automatizada", categoria: "Automação de processos", etiquetas: ["Formulários", "Documentos", "Etapas"],
@@ -534,7 +540,7 @@ var CELULA = {
     { id: "moneto", nome: "Moneto – Sistema de Finanças Pessoais", capa: window.CAPA_MONETO, categoria: "Finanças", plataforma: ["Excel"], tom: "dk",
       resumo: "Tenha o controle do seu dinheiro em um só lugar: receitas, despesas, cartões, contas e metas.", oferta: "Oferta de Black Friday",
       descricao: "Uma planilha em Excel que reúne todas as suas finanças em um só lugar. Você lança os dados e ela faz as contas.",
-      preco: "R$ 49,90", precoDe: "R$ 69,90", linkPagamento: "", video: "rYqJI9hGhfY",
+      preco: "R$ 49,90", precoDe: "R$ 69,90", linkPagamento: "https://pay.hotmart.com/W108562840M", video: "rYqJI9hGhfY",
       problema: "O salário acaba antes do mês e você não sabe para onde o dinheiro foi. A fatura do cartão surpreende, as parcelas se acumulam e as contas vencem sem você perceber.",
       solucao: "O Moneto reúne receitas, despesas, cartões, contas e metas em um só lugar. Você lança os dados e a planilha faz as contas.",
       resultado: "Em um só painel você vê quanto entrou, quanto saiu e quanto sobra. Evita juros e atrasos, sabe o que já está comprometido no cartão e acompanha suas metas.",
@@ -652,7 +658,9 @@ var CELULA = {
   }
 
   /* projetos */
-  $('#lista-projetos').innerHTML = C.projetos.map(function (p) {
+  var PJ = C.projetos.filter(function (p) { return !p.exemplo; }); if (!PJ.length) PJ = C.projetos;
+  $('#lista-projetos').className = PJ.length % 3 === 0 ? 'g3' : 'g2';
+  $('#lista-projetos').innerHTML = PJ.map(function (p) {
     return '<article class="pc">' + cabeca(p.tom, p.mock, p.etiquetas.map(esc).join(' · '), p.exemplo) +
       '<div class="corpo"><span class="cat">' + esc(p.categoria) + '</span><h3>' + esc(p.titulo) + '</h3><p>' + esc(p.texto) + '</p>' +
       '<a class="link" target="_blank" rel="noopener" href="' + zap('Olá! Vi o projeto "' + p.titulo + '" no site da Célula Studio e quero algo parecido.') + '">Conversar sobre um projeto ↗</a></div></article>';
